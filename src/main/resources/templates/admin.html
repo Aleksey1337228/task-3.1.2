@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+</head>
+<body>
+<h1>Админ-панель</h1>
+
+
+
+<!-- Список пользователей -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>Роли</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+
+            <!-- Кнопка для удаления -->
+            <form th:action="@{'/admin/delete/' + ${user.id}}" method="post" style="display:inline;">
+                <button type="submit">Удалить</button>
+            </form>
+
+
+            <!-- Форма для обновления -->
+            <form th:action="@{'/admin/update'}" method="post" style="display:inline;">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <input type="text" name="name" th:value="${user.name}" placeholder="Имя">
+                <input type="text" name="lastName" th:value="${user.lastName}" placeholder="Фамилия">
+                <input type="number" name="age" th:value="${user.age}" placeholder="Возраст">
+                <select name="roles" multiple>
+                    <option th:each="role : ${roles}"
+                            th:value="${role.id}"
+                            th:text="${role.roleName}"
+                            th:selected="${user.roles.contains(role)}">
+                    </option>
+                </select>
+                <button type="submit">Обновить</button>
+            </form>
+
+<!--            <form th:action="@{'/admin/update'}" method="post" style="display:inline;">-->
+<!--                <input type="hidden" name="id" th:value="${user.id}">-->
+<!--                <input type="text" name="name" th:value="${user.name}" placeholder="Имя">-->
+<!--                <input type="text" name="lastName" th:value="${user.lastName}" placeholder="Фамилия">-->
+<!--                <input type="number" name="age" th:value="${user.age}" placeholder="Возраст">-->
+<!--                <input type="password" name="password" placeholder="Новый пароль (опционально)">-->
+<!--                <select name="roles" multiple>-->
+<!--                    <option th:each="role : ${roles}"-->
+<!--                            th:value="${role.id}"-->
+<!--                            th:text="${role.roleName}"-->
+<!--                            th:selected="${user.roles.contains(role)}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <button type="submit">Обновить</button>-->
+<!--            </form>-->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!-- Форма для добавления нового пользователя -->
+<h2>Добавить нового пользователя</h2>
+<form action="/admin/add" method="post">
+    <input type="text" name="name" placeholder="Имя" required>
+    <input type="text" name="lastName" placeholder="Фамилия" required>
+    <input type="number" name="age" placeholder="Возраст" required>
+    <input type="password" name="password" placeholder="Пароль" required>
+    <select name="roles" multiple required>
+        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.roleName}"></option>
+    </select>
+    <button type="submit">Добавить</button>
+</form>
+
+<a href="/logout">Выйти</a>
+</body>
+</html>
+

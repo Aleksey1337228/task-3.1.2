@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Добавить пользователя</title>
+</head>
+<body>
+<h1>Добавить нового пользователя</h1>
+<form method="post" action="/admin/users/add">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" name="lastName" required><br>
+
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" name="age" required><br>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="roles">Роли:</label>
+    <select id="roles" name="roles" multiple>
+        <!-- Пример данных: заменить динамическим содержимым -->
+        <option value="1">ROLE_USER</option>
+        <option value="2">ROLE_ADMIN</option>
+    </select><br>
+
+    <button type="submit">Добавить</button>
+    <a href="/admin/users">Назад</a>
+</form>
+</body>
+</html>

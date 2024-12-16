@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+<h1>Ваш профиль</h1>
+<p><strong>Имя:</strong> <span th:text="${user.name}"></span></p>
+<p><strong>Фамилия:</strong> <span th:text="${user.lastName}"></span></p>
+<p><strong>Возраст:</strong> <span th:text="${user.age}"></span></p>
+<p><strong>Роли:</strong>
+<ul>
+    <li th:each="role : ${user.roles}" th:text="${role.roleName}"></li>
+</ul>
+</p>
+<a href="/logout">Выйти</a>
+</body>
+</html>
